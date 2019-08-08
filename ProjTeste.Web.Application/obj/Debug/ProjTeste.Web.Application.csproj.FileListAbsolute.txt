@@ -1,0 +1,9 @@
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\obj\Debug\ProjTeste.Web.Application.csprojResolveAssemblyReference.cache
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\ProjTeste.Web.Application.dll
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\ProjTeste.Web.Application.pdb
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\obj\Debug\ProjTeste.Web.Application.dll
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\obj\Debug\ProjTeste.Web.Application.pdb
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\Newtonsoft.Json.dll
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\Newtonsoft.Json.xml
+C:\Users\x\Documents\Projeto\Solucao\solucao3\ProjTeste.Web.Application\bin\Debug\System.Net.Http.Formatting.xml

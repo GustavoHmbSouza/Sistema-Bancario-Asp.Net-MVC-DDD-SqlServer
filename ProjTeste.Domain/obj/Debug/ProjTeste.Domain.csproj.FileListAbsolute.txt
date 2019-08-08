@@ -1,0 +1,5 @@
+C:\Users\x\Documents\Projeto\Solucao\Solucao3\ProjTeste.Domain\bin\Debug\ProjTeste.Domain.dll
+C:\Users\x\Documents\Projeto\Solucao\Solucao3\ProjTeste.Domain\bin\Debug\ProjTeste.Domain.pdb
+C:\Users\x\Documents\Projeto\Solucao\Solucao3\ProjTeste.Domain\obj\Debug\ProjTeste.Domain.csprojResolveAssemblyReference.cache
+C:\Users\x\Documents\Projeto\Solucao\Solucao3\ProjTeste.Domain\obj\Debug\ProjTeste.Domain.dll
+C:\Users\x\Documents\Projeto\Solucao\Solucao3\ProjTeste.Domain\obj\Debug\ProjTeste.Domain.pdb

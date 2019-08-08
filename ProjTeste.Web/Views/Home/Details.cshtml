@@ -1,0 +1,64 @@
+﻿@model ProjTeste.Web.Application.Conta.Model.ContaModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Detalhes da Conta</h2>
+
+<div>
+    <h4>@Model.Nome</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroConta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroConta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Saldo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Saldo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Extrato", "ListExtrato", "Operacao", new { id = Model.ContaId }, null) |
+    @Html.ActionLink("Depositar", "CreateDeposito", "Operacao", new { id = Model.ContaId }, null) |
+    @Html.ActionLink("Sacar", "CreateSaque", "Operacao", new { id = Model.ContaId }, null) |
+    @Html.ActionLink("Transferir", "CreateTransferencia", "Operacao", new { id = Model.ContaId }, null)
+</p>
+<p>
+    @Html.ActionLink("Voltar", "List")
+</p>
+

@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProjTeste.Web.Application.Conta.Model.OperacaoModel>
+
+@{
+    ViewBag.Title = "ListExtrato";
+}
+
+<h2>ListExtrato</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Num_Operacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Num_Valor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date_DataOperacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_TipoOperacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_Destinatario)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Num_Operacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Num_Valor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_DataOperacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_TipoOperacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_Destinatario)
+        </td>
+    </tr>
+}
+
+</table>
+
+<div>
+    @Html.ActionLink("Lista de Contas", "List", "Home")
+</div>
