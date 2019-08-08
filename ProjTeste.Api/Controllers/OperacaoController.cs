@@ -29,6 +29,7 @@ namespace ProjTeste.Api.Controllers
         {
             try
             {
+                _operacaoRepository.AtualizaSaldo(operacaoDTO);
                 _operacaoRepository.Saque(operacaoDTO);
                 return Ok();
             }
@@ -42,6 +43,7 @@ namespace ProjTeste.Api.Controllers
         {
             try
             {
+                _operacaoRepository.AtualizaSaldo(operacaoDTO);
                 _operacaoRepository.Deposito(operacaoDTO);
                 return Ok();
             }
@@ -55,6 +57,7 @@ namespace ProjTeste.Api.Controllers
         {
             try
             {
+                _operacaoRepository.AtualizaSaldo(operacaoDTO);
                 _operacaoRepository.Transferencia(operacaoDTO);
                 return Ok();
             }

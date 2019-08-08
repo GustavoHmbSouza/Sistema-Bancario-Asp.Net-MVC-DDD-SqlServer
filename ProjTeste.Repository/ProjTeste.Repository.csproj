@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ContaRepository.cs" />
     <Compile Include="Repositories\OperacaoRepository.cs" />
+    <Compile Include="Repositories\TipoContaRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProjTeste.Domain\ProjTeste.Domain.csproj">

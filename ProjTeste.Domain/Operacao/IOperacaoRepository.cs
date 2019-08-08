@@ -10,5 +10,6 @@ namespace ProjTeste.Domain.Operacoes
 		void Transferencia(OperacaoDTO operacaoDTO);
 		void Estorno(OperacaoDTO operacaoDTO);
         IEnumerable<OperacaoDTO> GetExtrato(int id);
+        void AtualizaSaldo(OperacaoDTO operacaoDTO);
     }
 }

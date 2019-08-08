@@ -15,25 +15,6 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados = conexaoBancoDados;
         }
 
-        public void Deposito(OperacaoDTO operacaoDTO)
-        {
-            AtualizaSaldo(operacaoDTO);
-            _conexaoBancoDados.ExecutarProcedure("Deposito");
-            _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
-            _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
-            _conexaoBancoDados.AddParametro("@Num_TipoOperacao", operacaoDTO.Num_TipoOperacao);
-            _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
-            _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
-
-            _conexaoBancoDados.ExecutarSemRetorno();
-        }
-
-        public void Estorno(OperacaoDTO operacaoDTO)
-        {
-            throw new NotImplementedException();
-        }
-
-        /*Num_Operacao, Date_DataOperacao, Num_Valor, Nom_Nome*/
         public IEnumerable<OperacaoDTO> GetExtrato(int id)
         {
             _conexaoBancoDados.ExecutarProcedure("ConsultaExtrato");
@@ -57,9 +38,25 @@ namespace ProjTeste.Repository.Repositories
             return contas;
         }
 
+        public void Deposito(OperacaoDTO operacaoDTO)
+        {
+            _conexaoBancoDados.ExecutarProcedure("Deposito");
+            _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
+            _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
+            _conexaoBancoDados.AddParametro("@Num_TipoOperacao", operacaoDTO.Num_TipoOperacao);
+            _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
+            _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
+
+            _conexaoBancoDados.ExecutarSemRetorno();
+        }
+
+        public void Estorno(OperacaoDTO operacaoDTO)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Saque(OperacaoDTO operacaoDTO)
         {
-            AtualizaSaldo(operacaoDTO);
             _conexaoBancoDados.ExecutarProcedure("Saque");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
             _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
@@ -72,7 +69,6 @@ namespace ProjTeste.Repository.Repositories
 
         public void Transferencia(OperacaoDTO operacaoDTO)
         {
-            AtualizaSaldo(operacaoDTO);
             _conexaoBancoDados.ExecutarProcedure("Transferencia");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
             _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
