@@ -72,9 +72,9 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.ExecutarProcedure("InsConta");
             _conexaoBancoDados.AddParametro("@Num_Conta", Conta.NumeroConta);
             _conexaoBancoDados.AddParametro("@Nom_Nome", Conta.Nome);
-            _conexaoBancoDados.AddParametro("@Num_Saldo", Conta.Saldo);
+            _conexaoBancoDados.AddParametro("@Num_Saldo", Conta.Saldo);  
             _conexaoBancoDados.AddParametro("@Date_DataCriacao", Conta.DataCriacao);
-            // _conexaoBancoDados.AddParametro("@Num_TipoConta", Conta.);
+             _conexaoBancoDados.AddParametro("@Num_TipoConta", Conta.TipoConta);
 
             _conexaoBancoDados.ExecutarSemRetorno();
         }

@@ -53,12 +53,12 @@
     <Compile Include="Class1.cs" />
     <Compile Include="ContaApplication.cs" />
     <Compile Include="Conta\Model\ContaModel.cs" />
+    <Compile Include="Conta\Model\SelectListItem.cs" />
     <Compile Include="OperacaoApplication.cs" />
     <Compile Include="Operacao\Model\OperacaoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoContaApplication.cs" />
     <Compile Include="TipoConta\Model\TipoContaModel.cs" />
-    <Compile Include="ViewModel\ContaTipoContaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

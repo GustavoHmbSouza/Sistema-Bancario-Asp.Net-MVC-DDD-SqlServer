@@ -2,7 +2,6 @@
 using ProjTeste.Web.Application.Conta;
 using ProjTeste.Web.Application.Conta.Model;
 using ProjTeste.Web.Application.TipoConta.Model;
-using ProjTeste.Web.Application.ViewModel;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
@@ -21,6 +20,7 @@ namespace ProjTeste.Web.Controllers
             _contaApplication = contaApplication;
             _tipoContaApplication = tipoContaApplication;
         }
+
         public ActionResult Index()
         {
             return View();
@@ -58,12 +58,18 @@ namespace ProjTeste.Web.Controllers
         public ActionResult Create()
         {
             HttpResponseMessage response = _tipoContaApplication.Get();
-            ContaTipoContaViewModel contaTipoContaViewModel = new ContaTipoContaViewModel
+            List<TipoContaModel> tipoContaModel = response.Content.ReadAsAsync<List<TipoContaModel>>().Result;
+
+            List<SelectListItem> TipoContaDdl = new List<SelectListItem>();
+
+            foreach(var TipoConta in tipoContaModel)
             {
-                ContaModel = new ContaModel(),
-                TipoContaModel = response.Content.ReadAsAsync<List<TipoContaModel>>().Result
-            };
-            return View(contaTipoContaViewModel);
+                TipoContaDdl.Add(new SelectListItem { Text = TipoConta.Nom_Nome, Value = TipoConta.Cod_Conta.ToString()});
+            }
+
+            ViewBag.TipoConta = TipoContaDdl;
+
+            return View(new ContaModel());
         }
 
         public ActionResult Post(ContaModel contaModel)

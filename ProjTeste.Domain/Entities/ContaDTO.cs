@@ -13,5 +13,7 @@ namespace ProjTeste.Domain.Entities
         public decimal Saldo { get; set; }
 
         public DateTime DataCriacao { get; set; }
+
+        public int TipoConta { get; set; }
     }
 }

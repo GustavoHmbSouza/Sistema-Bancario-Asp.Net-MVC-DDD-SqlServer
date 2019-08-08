@@ -21,6 +21,8 @@ namespace ProjTeste.Web.Application.Conta.Model
         [Display(Name = "Data da Criação")]
         public DateTime DataCriacao { get; set; }
 
+        public int TipoConta { get; set; }
+
         public ContaModel()
         {
             Random randNum = new Random();
