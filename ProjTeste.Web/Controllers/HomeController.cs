@@ -1,5 +1,8 @@
-﻿using ProjTeste.Web.Application.Conta;
+﻿using ProjTeste.Web.Application;
+using ProjTeste.Web.Application.Conta;
 using ProjTeste.Web.Application.Conta.Model;
+using ProjTeste.Web.Application.TipoConta.Model;
+using ProjTeste.Web.Application.ViewModel;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Mvc;
@@ -8,11 +11,20 @@ namespace ProjTeste.Web.Controllers
 {
     public class HomeController : Controller
     {
+        ContaApplication _contaApplication;
+        TipoContaApplication _tipoContaApplication;
+
+        public HomeController()
+        {
+            ContaApplication contaApplication = new ContaApplication();
+            TipoContaApplication tipoContaApplication = new TipoContaApplication();
+            _contaApplication = contaApplication;
+            _tipoContaApplication = tipoContaApplication;
+        }
         public ActionResult Index()
         {
             return View();
         }
-
 
 
         public ActionResult Contact()
@@ -24,60 +36,53 @@ namespace ProjTeste.Web.Controllers
 
         public ActionResult List()
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.GetConta();
+            HttpResponseMessage response = _contaApplication.GetConta();
 
             return View(response.Content.ReadAsAsync<List<ContaModel>>().Result);
         }
 
         public ActionResult Edit(int id)
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.GetConta(id);
+            HttpResponseMessage response = _contaApplication.GetConta(id);
 
             return View(response.Content.ReadAsAsync<ContaModel>().Result);
         }
 
         public ActionResult Put(ContaModel contaModel)
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.Put(contaModel);
+            HttpResponseMessage response = _contaApplication.Put(contaModel);
 
             return View("Index");
         }
 
         public ActionResult Create()
         {
-            ContaModel contaModel = new ContaModel();
-            return View(contaModel);
+            HttpResponseMessage response = _tipoContaApplication.Get();
+            ContaTipoContaViewModel contaTipoContaViewModel = new ContaTipoContaViewModel
+            {
+                ContaModel = new ContaModel(),
+                TipoContaModel = response.Content.ReadAsAsync<TipoContaModel>().Result
+            };
+            return View(contaTipoContaViewModel);
         }
 
         public ActionResult Post(ContaModel contaModel)
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.Post(contaModel);
+            HttpResponseMessage response = _contaApplication.Post(contaModel);
 
             return View("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.Delete(id);
+            HttpResponseMessage response = _contaApplication.Delete(id);
 
             return View("Index");
         }
 
         public ActionResult Details(int id)
         {
-            ContaApplication contaApplication = new ContaApplication();
-
-            HttpResponseMessage response = contaApplication.GetConta(id);
+            HttpResponseMessage response = _contaApplication.GetConta(id);
 
             return View(response.Content.ReadAsAsync<ContaModel>().Result);
         }
