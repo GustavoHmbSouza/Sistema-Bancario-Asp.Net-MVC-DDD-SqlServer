@@ -32,5 +32,11 @@ namespace ProjTeste.Web.Application.Conta.Model
 
         [Display(Name = "Destinatário")]
         public string Nom_Destinatario { get; set; }
+
+        public OperacaoModel()
+        {
+            Random randNum = new Random();
+            Num_Operacao = randNum.Next(255);
+        }
     }
 }

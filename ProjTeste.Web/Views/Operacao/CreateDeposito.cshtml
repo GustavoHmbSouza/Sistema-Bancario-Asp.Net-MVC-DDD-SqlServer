@@ -14,15 +14,7 @@
     <div class="form-horizontal">
         <h4>OperacaoModel</h4>
         <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Num_Operacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Num_Operacao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Num_Operacao, "", new { @class = "text-danger" })
-            </div>
-        </div>   
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })  
 
         <div class="form-group">
             @Html.LabelFor(model => model.Num_Valor, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -43,6 +35,8 @@
         <input type="hidden" class="form-control text-box single-line" id="Num_TipoOperacao" name="Num_TipoOperacao" value="@Model.Num_TipoOperacao" />
 
         <input type="hidden" class="form-control text-box single-line" id="Num_idConta1" name="Num_idConta1" value="@Model.Num_idConta1"/>
+
+        <input type="hidden" class="form-control text-box single-line" id="Num_Operacao" name="Num_Operacao" value="@Model.Num_Operacao" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

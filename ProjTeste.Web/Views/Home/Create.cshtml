@@ -17,26 +17,10 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
-            @Html.LabelFor(model => model.NumeroConta, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumeroConta, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumeroConta, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Saldo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Saldo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Saldo, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -47,6 +31,10 @@
                 @Html.ValidationMessageFor(model => model.DataCriacao, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <input type="hidden" class="form-control text-box single-line" id="Saldo" name="Saldo" value="@Model.Saldo" />
+
+        <input type="hidden" class="form-control text-box single-line" id="NumeroConta" name="NumeroConta" value="@Model.NumeroConta" />
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

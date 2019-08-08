@@ -51,8 +51,8 @@ namespace ProjTeste.Web.Controllers
 
         public ActionResult Create()
         {
-
-            return View();
+            ContaModel contaModel = new ContaModel();
+            return View(contaModel);
         }
 
         public ActionResult Post(ContaModel contaModel)

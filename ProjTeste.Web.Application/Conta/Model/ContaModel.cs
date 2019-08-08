@@ -20,5 +20,11 @@ namespace ProjTeste.Web.Application.Conta.Model
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data da Criação")]
         public DateTime DataCriacao { get; set; }
+
+        public ContaModel()
+        {
+            Random randNum = new Random();
+            NumeroConta = randNum.Next(255);
+        }
     }
 }
