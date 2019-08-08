@@ -1,6 +1,7 @@
 ﻿using ProjTeste.Domain.ConexaoBancoDados;
 using ProjTeste.Domain.Conta;
 using ProjTeste.Domain.Operacoes;
+using ProjTeste.Domain.TipoConta;
 using ProjTeste.Repository.Infra;
 using ProjTeste.Repository.Repositories;
 using SimpleInjector;
@@ -28,8 +29,8 @@ namespace ProjTeste.Api.App_Start
             container.Register<IConexaoBancoDados, ConexaoBancoDados>();
 
             container.Register<IContaRepository, ContaRepository>();
-
             container.Register<IOperacaoRepository, OperacaoRepository>();
+            container.Register<ITipoContaRepository, TipoContaRepository>();
         }
 
         private static void RegisterServices()

@@ -32,6 +32,15 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <select>
+                @foreach (var item in Model.TipoContaModel)
+                {      
+                    <option value = @item.Cod_Conta> @item.Nom_Nome </option >
+                }
+            </select>
+        </div>
+
         <input type="hidden" class="form-control text-box single-line" id="Saldo" name="Saldo" value="@Model.ContaModel.Saldo" />
 
         <input type="hidden" class="form-control text-box single-line" id="NumeroConta" name="NumeroConta" value="@Model.ContaModel.NumeroConta" />

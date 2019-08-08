@@ -25,7 +25,7 @@ namespace ProjTeste.Repository.Repositories
                 {
                     linhas.Add(new TipoContaDTO
                     {
-                        Cod_Conta = leitor.GetInt32(leitor.GetOrdinal("Cod_Conta")),
+                        Cod_Conta = leitor.GetByte(leitor.GetOrdinal("Cod_Conta")),
                         Nom_Nome = leitor.GetString(leitor.GetOrdinal("Nom_Nome"))
                     });
                 }

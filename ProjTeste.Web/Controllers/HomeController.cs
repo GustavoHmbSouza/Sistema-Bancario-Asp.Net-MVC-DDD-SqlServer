@@ -61,7 +61,7 @@ namespace ProjTeste.Web.Controllers
             ContaTipoContaViewModel contaTipoContaViewModel = new ContaTipoContaViewModel
             {
                 ContaModel = new ContaModel(),
-                TipoContaModel = response.Content.ReadAsAsync<TipoContaModel>().Result
+                TipoContaModel = response.Content.ReadAsAsync<List<TipoContaModel>>().Result
             };
             return View(contaTipoContaViewModel);
         }
