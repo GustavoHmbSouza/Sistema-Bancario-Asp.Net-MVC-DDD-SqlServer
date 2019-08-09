@@ -3,7 +3,6 @@ using System;
 using System.Data;
 using System.Data.SqlClient;
 
-
 namespace ProjTeste.Repository.Infra
 {
     public class ConexaoBancoDados : IConexaoBancoDados
@@ -77,6 +76,31 @@ namespace ProjTeste.Repository.Infra
         public SqlDataReader ExecuteReader()
         {
             return Command.ExecuteReader();
+        }
+
+        public void AddParametroReturn(string parameterName = "@RETURN_VALUE", DbType paramterType = DbType.Int16)
+        {
+            Command.Parameters.Add(new SqlParameter
+            {
+                ParameterName = parameterName,
+                Direction = ParameterDirection.ReturnValue,
+                DbType = paramterType
+            });
+        }
+
+        public int ExecuteNoQueryWithReturn()
+        {
+            try
+            {
+                AddParametroReturn();
+                Connect();
+                Command.ExecuteNonQuery();
+                return int.Parse(Command.Parameters["@RETURN_VALUE"].Value.ToString());
+            }
+            catch (SqlException ex)
+            {
+                return -1;
+            }
         }
     }
 

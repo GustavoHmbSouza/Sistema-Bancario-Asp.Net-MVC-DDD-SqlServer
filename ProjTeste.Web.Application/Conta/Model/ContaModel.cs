@@ -21,6 +21,7 @@ namespace ProjTeste.Web.Application.Conta.Model
         [Display(Name = "Data da Criação")]
         public DateTime DataCriacao { get; set; }
 
+        [Display(Name = "Tipo da Conta")]
         public int TipoConta { get; set; }
 
         public ContaModel()

@@ -38,14 +38,35 @@ namespace ProjTeste.Web.Controllers
         {
             HttpResponseMessage response = _contaApplication.GetConta();
 
-            return View(response.Content.ReadAsAsync<List<ContaModel>>().Result);
+            if (response.StatusCode == System.Net.HttpStatusCode.OK)
+            {            
+                return View(response.Content.ReadAsAsync<List<ContaModel>>().Result);               
+            }
+            else
+            {
+                return View("Index");
+            }
         }
 
         public ActionResult Edit(int id)
         {
-            HttpResponseMessage response = _contaApplication.GetConta(id);
+            HttpResponseMessage response = _tipoContaApplication.Get();
+            List<TipoContaModel> tipoContaModel = response.Content.ReadAsAsync<List<TipoContaModel>>().Result;
+            List<SelectListItem> TipoContaDdl = new List<SelectListItem>();
+            ContaModel contaModel = _contaApplication.GetConta(id).Content.ReadAsAsync<ContaModel>().Result;
 
-            return View(response.Content.ReadAsAsync<ContaModel>().Result);
+            foreach (var TipoConta in tipoContaModel)
+            {
+                TipoContaDdl.Add(new SelectListItem
+                {
+                    Text = TipoConta.Nom_Nome,
+                    Value = TipoConta.Cod_Conta.ToString(),
+                    Selected = (TipoConta != null) && (TipoConta.Cod_Conta == contaModel.TipoConta)
+                });
+            }
+            ViewBag.TipoConta = TipoContaDdl;
+
+            return View(contaModel);
         }
 
         public ActionResult Put(ContaModel contaModel)
@@ -64,7 +85,10 @@ namespace ProjTeste.Web.Controllers
 
             foreach(var TipoConta in tipoContaModel)
             {
-                TipoContaDdl.Add(new SelectListItem { Text = TipoConta.Nom_Nome, Value = TipoConta.Cod_Conta.ToString()});
+                TipoContaDdl.Add(new SelectListItem {
+                    Text = TipoConta.Nom_Nome,
+                    Value = TipoConta.Cod_Conta.ToString()
+                });
             }
 
             ViewBag.TipoConta = TipoContaDdl;

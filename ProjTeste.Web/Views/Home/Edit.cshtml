@@ -32,6 +32,13 @@
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoConta, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TipoConta")
+            </div>
+        </div>
+
         <input type="hidden" class="form-control text-box single-line" id="Saldo" name="Saldo" value="@Model.Saldo" />
 
         <input type="hidden" class="form-control text-box single-line" id="NumeroConta" name="NumeroConta" value="@Model.NumeroConta" />

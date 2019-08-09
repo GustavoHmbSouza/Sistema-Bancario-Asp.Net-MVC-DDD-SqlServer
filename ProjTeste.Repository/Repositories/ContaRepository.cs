@@ -22,7 +22,7 @@ namespace ProjTeste.Repository.Repositories
 
         public IEnumerable<ContaDTO> Get()
         {
-            _conexaoBancoDados.ExecutarProcedure("ConsultaConta");
+            _conexaoBancoDados.ExecutarProcedure("SelConta");
 
             var contas = new List<ContaDTO>();
             using (var leitor = _conexaoBancoDados.ExecuteReader())
@@ -35,7 +35,8 @@ namespace ProjTeste.Repository.Repositories
                         NumeroConta = leitor.GetByte(leitor.GetOrdinal("Num_Conta")),
                         Nome = leitor.GetString(leitor.GetOrdinal("Nom_Nome")),
                         Saldo = leitor.GetDecimal(leitor.GetOrdinal("Num_Saldo")),
-                        DataCriacao = leitor.GetDateTime(leitor.GetOrdinal("Date_DataCriacao"))
+                        DataCriacao = leitor.GetDateTime(leitor.GetOrdinal("Date_DataCriacao")),
+                        TipoConta = leitor.GetByte(leitor.GetOrdinal("Num_TipoConta"))
                     });
                 }
             }
@@ -45,7 +46,7 @@ namespace ProjTeste.Repository.Repositories
 
         public ContaDTO Get(int id)
         {
-            _conexaoBancoDados.ExecutarProcedure("ConsultaContaId");
+            _conexaoBancoDados.ExecutarProcedure("SelContaId");
             _conexaoBancoDados.AddParametro("@Num_SeqlConta", id);
 
             var contas = new ContaDTO();
@@ -60,7 +61,8 @@ namespace ProjTeste.Repository.Repositories
                         NumeroConta = leitor.GetByte(leitor.GetOrdinal("Num_Conta")),
                         Nome = leitor.GetString(leitor.GetOrdinal("Nom_Nome")),
                         Saldo = leitor.GetDecimal(leitor.GetOrdinal("Num_Saldo")),
-                        DataCriacao = leitor.GetDateTime(leitor.GetOrdinal("Date_DataCriacao"))
+                        DataCriacao = leitor.GetDateTime(leitor.GetOrdinal("Date_DataCriacao")),
+                        TipoConta = leitor.GetByte(leitor.GetOrdinal("Num_TipoConta"))
                     };
                 }
             }
@@ -87,7 +89,7 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Nom_Nome", Conta.Nome);
             _conexaoBancoDados.AddParametro("@Num_Saldo", Conta.Saldo);
             _conexaoBancoDados.AddParametro("@Date_DataCriacao", Conta.DataCriacao);
-            // _conexaoBancoDados.AddParametro("@Num_TipoConta", Conta.);
+             _conexaoBancoDados.AddParametro("@Num_TipoConta", Conta.TipoConta);
 
             _conexaoBancoDados.ExecutarSemRetorno();
         }

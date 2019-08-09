@@ -17,7 +17,7 @@ namespace ProjTeste.Repository.Repositories
 
         public IEnumerable<OperacaoDTO> GetExtrato(int id)
         {
-            _conexaoBancoDados.ExecutarProcedure("ConsultaExtrato");
+            _conexaoBancoDados.ExecutarProcedure("SelExtrato");
             _conexaoBancoDados.AddParametro("@Num_idConta1", id);
 
             var contas = new List<OperacaoDTO>();
@@ -40,14 +40,17 @@ namespace ProjTeste.Repository.Repositories
 
         public void Deposito(OperacaoDTO operacaoDTO)
         {
-            _conexaoBancoDados.ExecutarProcedure("Deposito");
+            _conexaoBancoDados.ExecutarProcedure("InsDeposito");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
             _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
             _conexaoBancoDados.AddParametro("@Num_TipoOperacao", operacaoDTO.Num_TipoOperacao);
             _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
 
-            _conexaoBancoDados.ExecutarSemRetorno();
+            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
+            {
+                AtualizaSaldo(operacaoDTO);
+            }
         }
 
         public void Estorno(OperacaoDTO operacaoDTO)
@@ -57,19 +60,22 @@ namespace ProjTeste.Repository.Repositories
 
         public void Saque(OperacaoDTO operacaoDTO)
         {
-            _conexaoBancoDados.ExecutarProcedure("Saque");
+            _conexaoBancoDados.ExecutarProcedure("InsSaque");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
             _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
             _conexaoBancoDados.AddParametro("@Num_TipoOperacao", operacaoDTO.Num_TipoOperacao);
             _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
 
-            _conexaoBancoDados.ExecutarSemRetorno();
+            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
+            {
+                AtualizaSaldo(operacaoDTO);
+            }
         }
 
         public void Transferencia(OperacaoDTO operacaoDTO)
         {
-            _conexaoBancoDados.ExecutarProcedure("Transferencia");
+            _conexaoBancoDados.ExecutarProcedure("InsTransferencia");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
             _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
             _conexaoBancoDados.AddParametro("@Num_TipoOperacao", operacaoDTO.Num_TipoOperacao);
@@ -77,7 +83,10 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
             _conexaoBancoDados.AddParametro("@Num_idConta2", operacaoDTO.Num_idConta2);
 
-            _conexaoBancoDados.ExecutarSemRetorno();
+            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
+            {
+                AtualizaSaldo(operacaoDTO);
+            }
         }
 
         /* @Num_TipoOperacao TINYINT, @Num_Valor DECIMAL, @Num_idConta1 INT, @Num_idConta2 INT*/

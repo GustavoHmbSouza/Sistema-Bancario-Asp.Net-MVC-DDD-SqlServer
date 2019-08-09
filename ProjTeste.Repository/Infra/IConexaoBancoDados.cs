@@ -13,5 +13,7 @@ namespace ProjTeste.Domain.ConexaoBancoDados
         void ExecutarSemRetorno();
 
         SqlDataReader ExecuteReader();
+
+        int ExecuteNoQueryWithReturn();
     }
 }

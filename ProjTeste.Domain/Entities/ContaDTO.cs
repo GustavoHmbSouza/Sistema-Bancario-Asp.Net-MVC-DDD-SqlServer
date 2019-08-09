@@ -14,6 +14,6 @@ namespace ProjTeste.Domain.Entities
 
         public DateTime DataCriacao { get; set; }
 
-        public int TipoConta { get; set; }
+        public byte TipoConta { get; set; }
     }
 }
