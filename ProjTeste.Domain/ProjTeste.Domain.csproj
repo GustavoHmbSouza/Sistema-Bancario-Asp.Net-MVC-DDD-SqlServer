@@ -45,7 +45,10 @@
     <Compile Include="Entities\ContaDTO.cs" />
     <Compile Include="Entities\OperacaoDTO.cs" />
     <Compile Include="Entities\TipoContaDTO.cs" />
+    <Compile Include="Notification\Notification.cs" />
     <Compile Include="Operacao\IOperacaoRepository.cs" />
+    <Compile Include="Operacao\IOperacaoService.cs" />
+    <Compile Include="Operacao\OperacaoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TipoConta\ITipoContaRepository.cs" />
   </ItemGroup>

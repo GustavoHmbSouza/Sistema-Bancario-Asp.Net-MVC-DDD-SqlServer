@@ -36,13 +36,15 @@ CREATE TABLE Operacoes
 	Num_SeqlOperacao	INT IDENTITY,
 	Num_Operacao		INT NOT NULL,
 	Num_TipoOperacao	TINYINT NOT NULL,
-	Num_idConta1		INT NOT NULL,
+	Num_idConta1		INT,
 	Num_idConta2		INT,
-	Num_Valor			DECIMAL(10,2) NOT NULL,
+	Num_idOperacoes		INT,
+	Num_Valor			DECIMAL(10,2),
 	Date_DataOperacao	DATETIME NOT NULL,
 
 	CONSTRAINT PK_Operacoes PRIMARY KEY (Num_SeqlOperacao),
 	CONSTRAINT Fk_TipoOperacao_Operacoes FOREIGN KEY (Num_TipoOperacao) REFERENCES TipoOperacao (Cod_TipoOperacao),
 	CONSTRAINT Fk_Conta_Operacoes1 FOREIGN KEY (Num_idConta1) REFERENCES Conta (Num_SeqlConta),
 	CONSTRAINT Fk_Conta_Operacoes2 FOREIGN KEY (Num_idConta2) REFERENCES Conta (Num_SeqlConta),
+	CONSTRAINT Fk_Operacoes_Operacoes FOREIGN KEY (Num_idOperacoes) REFERENCES Operacoes (Num_SeqlOperacao)
 );
