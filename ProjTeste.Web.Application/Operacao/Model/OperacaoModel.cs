@@ -30,8 +30,11 @@ namespace ProjTeste.Web.Application.Conta.Model
         [Display(Name = "Tipo da Operação")]
         public string Nom_TipoOperacao { get; set; }
 
-        [Display(Name = "Destinatário")]
-        public string Nom_Destinatario { get; set; }
+        //[Display(Name = "Para")]
+        public string Nom_TransferenciaPara { get; set; }
+
+        //[Display(Name = "De")]
+        public string Nom_TransferenciaDe { get; set; }
 
         public OperacaoModel()
         {

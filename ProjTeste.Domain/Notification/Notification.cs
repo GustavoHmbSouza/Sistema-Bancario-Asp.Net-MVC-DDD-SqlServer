@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ProjTeste.Domain.Notification
 {
-    public class Notification
+    public class Notification : INotification
     {
         private List<string> Erros;
 
-        
+        public Notification()
+        {
+            this.Erros = new List<string>();
+        }
+
+        public void adicionaErro(string Erro)
+        {
+            Erros.Add(Erro);
+        }
+
+        public List<string> getErros()
+        {
+            return this.Erros;
+        }
     }
 }

@@ -16,12 +16,15 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Date_DataOperacao)
-        </th>
+        </th>     
         <th>
             @Html.DisplayNameFor(model => model.Nom_TipoOperacao)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nom_Destinatario)
+            @Html.DisplayNameFor(model => model.Nom_TransferenciaDe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_TransferenciaPara)
         </th>
         <th></th>
     </tr>
@@ -36,12 +39,15 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date_DataOperacao)
-        </td>
+        </td>     
         <td>
             @Html.DisplayFor(modelItem => item.Nom_TipoOperacao)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Nom_Destinatario)
+            @Html.DisplayFor(modelItem => item.Nom_TransferenciaDe)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_TransferenciaPara)
         </td>
     </tr>
 }

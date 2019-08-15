@@ -7,9 +7,10 @@ namespace ProjTeste.Domain.Operacoes
     {
 		void Saque(OperacaoDTO operacaoDTO);
 		void Deposito(OperacaoDTO operacaoDTO);
-		void Transferencia(OperacaoDTO operacaoDTO);
+		int Transferencia(OperacaoDTO operacaoDTO);
 		void Estorno(OperacaoDTO operacaoDTO);
         IEnumerable<OperacaoDTO> GetExtrato(int id);
         void AtualizaSaldo(OperacaoDTO operacaoDTO);
+        int VerificaSaldo(OperacaoDTO operacaoDTO);
     }
 }

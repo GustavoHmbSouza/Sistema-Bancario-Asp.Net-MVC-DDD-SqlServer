@@ -76,14 +76,24 @@ CREATE PROCEDURE [dbo].[InsTransferencia] @Num_idConta1 INT, @Num_Valor DECIMAL,
 	Autor.............: SMN - Gustavo Matos
  	Data..............: 07/08/2019
 	Ex................: EXEC [dbo].[InsTransferencia]
-
+	Retornos:.........: 0 - Sucesso
+						1 - Não existe a conta da transferência
 	*/
 
 	BEGIN
+		
+		DECLARE @qtdRows INT
+
+		SELECT @qtdRows = COUNT(*) FROM [dbo].[Conta] WHERE Num_SeqlConta = @Num_idConta2
+
+		if (@qtdRows = 0) 
+			return 1
 
 		INSERT INTO [dbo].[Operacoes] (Num_Operacao, Num_Tipooperacao, Num_idConta1, Num_idConta2, Num_Valor, Date_DataOperacao)
 			VALUES (@Num_Operacao,  @Num_TipoOperacao, @Num_idconta1, @Num_idconta2, @Num_Valor, @Date_DataOperacao);
 	
+		return 0
+
 	END
 GO
 				
@@ -107,10 +117,36 @@ CREATE PROCEDURE [dbo].[SelExtrato] @Num_idConta1  INT
 
 	BEGIN
 	
-		SELECT Num_Operacao, Date_DataOperacao, Num_Valor,( SELECT Nom_Nome FROM [dbo].[TipoOperacao] WITH(NOLOCK) WHERE Cod_TipoOperacao = Num_TipoOperacao) AS Nom_TipoOperacao, 
-			COALESCE((SELECT Nom_Nome FROM [dbo].[Conta] WITH(NOLOCK) WHERE Num_SeqlConta = Num_idConta2), '--') AS 'Nom_Destinatario'
+		SELECT Num_Operacao,
+		Date_DataOperacao,
+		Num_Valor,
+		(	
+			SELECT Nom_Nome FROM [dbo].[TipoOperacao] WITH(NOLOCK) WHERE Cod_TipoOperacao = Num_TipoOperacao
+		) 
+		AS Nom_TipoOperacao, 
+		COALESCE
+		(
+			(
+				SELECT Nom_Nome
+					FROM [dbo].[Conta] WITH(NOLOCK) 
+					WHERE Num_SeqlConta = Num_idConta1
+			)
+			, '--'
+		) 
+		AS 'Nom_TransferenciaDe',
+		COALESCE
+		(
+			(
+				SELECT Nom_Nome
+					FROM [dbo].[Conta] WITH(NOLOCK) 
+					WHERE Num_SeqlConta = Num_idConta2
+			)
+			, '--'
+		) 
+		AS 'Nom_TransferenciaPara'
 			FROM [dbo].[Operacoes] WITH(NOLOCK)
-			WHERE Num_idConta1 = @Num_idConta1
+			WHERE Num_idConta1 = @Num_idConta1 
+				OR Num_idConta2 = @Num_idConta1 
 
 	END
 GO
@@ -213,3 +249,35 @@ CREATE PROCEDURE [dbo].[VerificaSaldoNaConta] @Num_idConta1 INT, @Num_Valor DECI
 
 	END
 GO
+
+
+	SELECT Num_Operacao,
+		Date_DataOperacao,
+		Num_Valor,
+		(	
+			SELECT Nom_Nome FROM [dbo].[TipoOperacao] WITH(NOLOCK) WHERE Cod_TipoOperacao = Num_TipoOperacao
+		) 
+		AS Nom_TipoOperacao, 
+		COALESCE
+		(
+			(
+				SELECT Nom_Nome
+					FROM [dbo].[Conta] WITH(NOLOCK) 
+					WHERE Num_SeqlConta = Num_idConta1
+			)
+			, '--'
+		) 
+		AS 'Nom_TransferenciaDe',
+		COALESCE
+		(
+			(
+				SELECT Nom_Nome
+					FROM [dbo].[Conta] WITH(NOLOCK) 
+					WHERE Num_SeqlConta = Num_idConta2
+			)
+			, '--'
+		) 
+		AS 'Nom_TransferenciaPara'
+			FROM [dbo].[Operacoes] WITH(NOLOCK)
+			WHERE Num_idConta1 = 2
+				OR Num_idConta2 = 2

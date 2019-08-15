@@ -11,8 +11,8 @@ namespace ProjTeste.Domain.Entities
         public int Num_idConta2 { get; set; }
         public decimal Num_Valor { get; set; }
         public DateTime Date_DataOperacao { get; set; }
-
-        public string Nom_TipoOperacao{ get; set; }
-        public string Nom_Destinatario { get; set; }
+        public string Nom_TipoOperacao { get; set; }
+        public string Nom_TransferenciaPara { get; set; }
+        public string Nom_TransferenciaDe { get; set; }
     }
 }

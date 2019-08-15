@@ -4,16 +4,11 @@ namespace ProjTeste.Domain.ConexaoBancoDados
 {
     public interface IConexaoBancoDados
     {
-        SqlConnection Connect();
-
-        void ExecutarProcedure(string nomeProcedure);
-
-        void AddParametro(string nomeParametro, object valor);
-
-        void ExecutarSemRetorno();
-
-        SqlDataReader ExecuteReader();
-
-        int ExecuteNoQueryWithReturn();
+        SqlConnection SqlConnection { get; }
+        SqlTransaction SqlTransaction { get; }
+        void OpenTransaction();
+        void Commit();
+        void Rollback();
+        void Dispose();
     }
 }

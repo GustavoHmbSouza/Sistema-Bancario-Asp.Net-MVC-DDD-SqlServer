@@ -45,6 +45,7 @@
     <Compile Include="Entities\ContaDTO.cs" />
     <Compile Include="Entities\OperacaoDTO.cs" />
     <Compile Include="Entities\TipoContaDTO.cs" />
+    <Compile Include="Notification\INotification.cs" />
     <Compile Include="Notification\Notification.cs" />
     <Compile Include="Operacao\IOperacaoRepository.cs" />
     <Compile Include="Operacao\IOperacaoService.cs" />

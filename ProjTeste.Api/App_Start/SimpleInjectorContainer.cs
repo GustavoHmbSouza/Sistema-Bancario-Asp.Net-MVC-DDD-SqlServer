@@ -1,5 +1,7 @@
 ﻿using ProjTeste.Domain.ConexaoBancoDados;
 using ProjTeste.Domain.Conta;
+using ProjTeste.Domain.Notification;
+using ProjTeste.Domain.Operacao;
 using ProjTeste.Domain.Operacoes;
 using ProjTeste.Domain.TipoConta;
 using ProjTeste.Repository.Infra;
@@ -17,6 +19,8 @@ namespace ProjTeste.Api.App_Start
         {
             container.Options.DefaultScopedLifestyle = new AsyncScopedLifestyle();
 
+            container.Register<INotification, Notification>(Lifestyle.Scoped);
+
             RegisterRepositories();
             RegisterServices();
 
@@ -31,6 +35,8 @@ namespace ProjTeste.Api.App_Start
             container.Register<IContaRepository, ContaRepository>();
             container.Register<IOperacaoRepository, OperacaoRepository>();
             container.Register<ITipoContaRepository, TipoContaRepository>();
+            container.Register<IOperacaoService, OperacaoService>();
+            //container.Register<INotification, Notification>();
         }
 
         private static void RegisterServices()

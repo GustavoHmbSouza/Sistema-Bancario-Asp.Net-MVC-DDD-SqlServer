@@ -1,5 +1,6 @@
 ﻿using ProjTeste.Domain.ConexaoBancoDados;
 using ProjTeste.Domain.Entities;
+using ProjTeste.Domain.Notification;
 using ProjTeste.Domain.Operacoes;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ namespace ProjTeste.Repository.Repositories
 {
     public class OperacaoRepository : IOperacaoRepository
     {
-        private readonly IConexaoBancoDados _conexaoBancoDados;
+        public readonly IConexaoBancoDados _conexaoBancoDados;
+        private readonly INotification _notification;
 
-        public OperacaoRepository(IConexaoBancoDados conexaoBancoDados)
+        public OperacaoRepository(IConexaoBancoDados conexaoBancoDados, INotification notification)
         {
             _conexaoBancoDados = conexaoBancoDados;
+            _notification = notification;
         }
 
         public IEnumerable<OperacaoDTO> GetExtrato(int id)
@@ -31,7 +34,8 @@ namespace ProjTeste.Repository.Repositories
                         Date_DataOperacao = leitor.GetDateTime(leitor.GetOrdinal("Date_DataOperacao")),
                         Num_Valor = leitor.GetDecimal(leitor.GetOrdinal("Num_Valor")),
                         Nom_TipoOperacao = leitor.GetString(leitor.GetOrdinal("Nom_TipoOperacao")),
-                        Nom_Destinatario = leitor.GetString(leitor.GetOrdinal("Nom_Destinatario"))
+                        Nom_TransferenciaPara = leitor.GetString(leitor.GetOrdinal("Nom_TransferenciaPara")),
+                        Nom_TransferenciaDe = leitor.GetString(leitor.GetOrdinal("Nom_TransferenciaDe"))
                     });
                 }
             }
@@ -47,10 +51,7 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
 
-            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
-            {
-                AtualizaSaldo(operacaoDTO);
-            }
+            _conexaoBancoDados.ExecutarSemRetorno();
         }
 
         public void Estorno(OperacaoDTO operacaoDTO)
@@ -67,13 +68,10 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Num_Operacao", operacaoDTO.Num_Operacao);
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
 
-            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
-            {
-                AtualizaSaldo(operacaoDTO);
-            }
+            _conexaoBancoDados.ExecutarSemRetorno();
         }
 
-        public void Transferencia(OperacaoDTO operacaoDTO)
+        public int Transferencia(OperacaoDTO operacaoDTO)
         {
             _conexaoBancoDados.ExecutarProcedure("InsTransferencia");
             _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
@@ -83,13 +81,15 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Date_DataOperacao", operacaoDTO.Date_DataOperacao);
             _conexaoBancoDados.AddParametro("@Num_idConta2", operacaoDTO.Num_idConta2);
 
-            if (_conexaoBancoDados.ExecuteNoQueryWithReturn() == 0)
+            int retornoBanco = _conexaoBancoDados.ExecuteNoQueryWithReturn();
+            if (retornoBanco == 1)
             {
-                AtualizaSaldo(operacaoDTO);
+                _notification.adicionaErro("Conta do destino da transferência não encontrada");
             }
+
+            return retornoBanco;
         }
 
-        /* @Num_TipoOperacao TINYINT, @Num_Valor DECIMAL, @Num_idConta1 INT, @Num_idConta2 INT*/
         public void AtualizaSaldo(OperacaoDTO operacaoDTO)
         {
             _conexaoBancoDados.ExecutarProcedure("AltSaldo");
@@ -99,6 +99,21 @@ namespace ProjTeste.Repository.Repositories
             _conexaoBancoDados.AddParametro("@Num_idConta2", operacaoDTO.Num_idConta2);
 
             _conexaoBancoDados.ExecutarSemRetorno();
+        }
+
+        public int VerificaSaldo(OperacaoDTO operacaoDTO)
+        {
+            _conexaoBancoDados.ExecutarProcedure("VerificaSaldoNaConta");
+            _conexaoBancoDados.AddParametro("@Num_idConta1", operacaoDTO.Num_idConta1);
+            _conexaoBancoDados.AddParametro("@Num_Valor", operacaoDTO.Num_Valor);
+
+            int retornoBanco = _conexaoBancoDados.ExecuteNoQueryWithReturn();
+            if (retornoBanco == 1)
+            {
+                _notification.adicionaErro("Saldo Insuficiente");
+            }
+
+            return retornoBanco;
         }
     }
 }
